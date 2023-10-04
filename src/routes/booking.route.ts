@@ -1,20 +1,32 @@
 import express, { Router } from "express";
+import BookingCntroller from "../controllers/booking.controller";
 import AuthMiddleware from "../middlewares/auth.middleware";
 
 const bookingRouter: Router = express.Router();
 
 const authInstance = new AuthMiddleware();
+const bookingInstance = new BookingCntroller();
 
 // create a booking
-bookingRouter.post("/create", authInstance.isAuthenticated);
-
-// get all booking for user
-bookingRouter.get("/read", authInstance.isAuthenticated);
+bookingRouter.post(
+  "/create/:bid",
+  authInstance.isAuthenticated,
+  bookingInstance.createABooking,
+);
 
 // delete a booking
-bookingRouter.delete("/:bid", authInstance.isAuthenticated);
+bookingRouter.delete(
+  "/:bid",
+  authInstance.isAuthenticated,
+  bookingInstance.deleteABooking,
+);
 
 // get all all bookings
-bookingRouter.post("/", authInstance.isAuthenticated, authInstance.isAdmin);
+bookingRouter.get(
+  "/",
+  authInstance.isAuthenticated,
+  authInstance.isAdmin,
+  bookingInstance.getAllBookings,
+);
 
 export default bookingRouter;

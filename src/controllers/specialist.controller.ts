@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { handleError } from "../errors/handle.error";
+import BeautyPackageModel from "../models/beautyPackage.model";
 import SpecialistModel from "../models/specialist.model";
 
 export default class SpecialistController {
@@ -27,7 +28,7 @@ export default class SpecialistController {
       }
 
       await Promise.resolve().then(async () => {
-        const specialist = await SpecialistModel.findById({ sid });
+        const specialist = await SpecialistModel.findById(sid);
 
         res.status(200).json(specialist);
       });
@@ -38,8 +39,12 @@ export default class SpecialistController {
 
   public async createASpecialist(req: Request, res: Response): Promise<void> {
     try {
-      const { name, designation, bio, photoUrl, dateOfBirth, beautyPackages } =
-        req.body;
+      const { name, designation, bio, photoUrl, dateOfBirth } = req.body;
+      const { bid } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(bid)) {
+        res.status(404).json({ message: "Beauty Package not found!" });
+      }
 
       await Promise.resolve().then(async () => {
         const specialist = await SpecialistModel.create({
@@ -48,7 +53,12 @@ export default class SpecialistController {
           bio,
           photoUrl,
           dateOfBirth,
-          beautyPackages,
+        });
+
+        await BeautyPackageModel.findByIdAndUpdate(bid, {
+          $addToSet: {
+            specialists: specialist._id,
+          },
         });
 
         res.status(200).json(specialist);
@@ -60,8 +70,7 @@ export default class SpecialistController {
 
   public async updateASpecialist(req: Request, res: Response): Promise<void> {
     try {
-      const { name, designation, bio, photoUrl, dateOfBirth, beautyPackages } =
-        req.body;
+      const { name, designation, bio, photoUrl, dateOfBirth } = req.body;
       const { sid } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(sid)) {
@@ -77,7 +86,6 @@ export default class SpecialistController {
             bio,
             photoUrl,
             dateOfBirth,
-            beautyPackages,
           },
           { new: true },
         );

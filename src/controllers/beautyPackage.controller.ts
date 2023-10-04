@@ -30,7 +30,7 @@ export default class BeautyPackageController {
       }
 
       await Promise.resolve().then(async () => {
-        const beautyPackage = await BeautyPackageModel.findById({ bid });
+        const beautyPackage = await BeautyPackageModel.findById(bid);
 
         res.status(200).json(beautyPackage);
       });
