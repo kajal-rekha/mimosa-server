@@ -1,7 +1,7 @@
 # Mimosa-server
 
 ## Introduction
-Mimosa-server is a full-stack web application designed for a beauty salon and spa. It provides a seamless experience for users to explore various beauty packages, book appointments, and manage their bookings. Additionally, administrators have the capability to manage both users and beauty packages efficiently.
+Mimosa stands as your distinctive retreat for beauty and rejuvenation. Immerse yourself in the essence of luxury at our parlor and spa, where a curated selection of exclusive beauty packages and spa treatments awaits, tailored to ensure you not only look but truly feel your best. Whether it's a day of revitalizing spa indulgence or the refinement of your natural beauty through our expert services, Mimosa offers a uniquely tailored experience that sets us apart.
 
 ## Features
 - **Browse Beauty Packages:** Users can explore a wide range of beauty packages offered by the salon.
