@@ -22,7 +22,7 @@ Mimosa stands as your distinctive retreat for beauty and rejuvenation. Immerse y
 - **TypeScript** 
 - **JSON Web Tokens (JWT)**
 
-
+# Models
 ## User
 
 | Field        | Data Type | Description            |
