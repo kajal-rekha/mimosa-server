@@ -4,6 +4,7 @@ import AuthController from "../controllers/auth.controller";
 const authRouter: Router = express.Router();
 
 const authInstance = new AuthController();
+
 // register
 authRouter.post("/register", authInstance.register);
 
